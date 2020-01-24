@@ -18,29 +18,31 @@ from openbrokerapi.service_broker import (
 class TuFilesServiceBroker(ServiceBroker):
     def catalog(self):
         return Service(
-            id='00000000-0000-0000-0000-000000000001',
+            id='f02f46b2-d20d-4b6b-a9fa-6e7d28fddc9c',
             name='tu-files',
             description='Highly available network drive for institutes and organizational units.',
-            bindable=False,
+            bindable=True,
             metadata=ServiceMetadata(
                 displayName='TUfiles',
                 imageUrl='http://example.com/tufiles_logo.png',
-                longDescription='Some longer description of the TUfiles service...',
+                longDescription='With TUfiles, we give you the opportunity to store data on a central and readily available network drive with backup (hosted on Windows servers). TUfiles is suitable for storing data with moderate access requirements, but high availability demands. TUfiles is not suitable for applications demanding high storage performance for a long period of time, such as high-performance databases, computer applications with high data access requirements and for storing local Microsoft Outlook PST files and backups.',
                 providerDisplayName='TU.it',
                 documentationUrl='https://www.it.tuwien.ac.at/tufiles/',
                 supportUrl='https://support.tuwien.ac.at/assystnet/'
             ),
             plans=[
                 ServicePlan(
-                    id='00000000-0000-0000-0000-000000000001',
+                    id='04cd4e4a-f296-4090-b4f4-0e5717bb90c6',
                     name='standard',
-                    description='Some description of this service plan',
+                    description='Highly available network drive with standard authorization concept.',
                     free=False,
                     metadata=ServicePlanMetaData(
                         displayName='Standard authorization concept',
-                        bullets=['Feature1',
-                                 'Feature2',
-                                 'Feature3',
+                        bullets=['Redundant and readily available network drive',
+                                 'You can personally administer access rights and authorisations in folders',
+                                 'Useful for working with older file versions',
+                                 'With Windows 7/8/8.1/10, Linux and MacOS from SMB version 2.1',
+                                 'Not intended for storing your backups'
                                  ],
                         costs=[ServicePlanCost(
                             amount={'eur': 0.03},
@@ -62,6 +64,10 @@ class TuFilesServiceBroker(ServiceBroker):
                                             'description': 'Size of storage in GB.',
                                             'type': 'int'
                                         },
+                                        'authorization-group': {
+                                            'description': 'Name of the upTUdate authorization group.',
+                                            'type': 'string'
+                                        }
                                     }
                                 }
                             },
@@ -91,72 +97,9 @@ class TuFilesServiceBroker(ServiceBroker):
                                     }
                                 }
                             }
-                        },
+                        }
                     )
-                ),
-                ServicePlan(
-                    id='00000000-0000-0000-0000-000000000002',
-                    name='special',
-                    description='Some description of this service plan',
-                    free=False,
-                    metadata=ServicePlanMetaData(
-                        displayName='Special authorization concept',
-                        bullets=['Feature1',
-                                 'Feature2',
-                                 'Feature3',
-                                 ],
-                        costs=[ServicePlanCost(
-                            amount={'eur': 0.03},
-                            unit='GB per quarter'
-                        )]
-                    ),
-                    schemas=Schemas(
-                        service_instance={
-                            'create': {
-                                'parameters': {
-                                    '$schema': 'http://json-schema.org/draft-04/schema#',
-                                    'type': 'object',
-                                    'properties': {
-                                        'share-name': {
-                                            'description': 'Name of the network drive.',
-                                            'type': 'string'
-                                        },
-                                        'size': {
-                                            'description': 'Size of storage in GB.',
-                                            'type': 'int'
-                                        },
-                                    }
-                                }
-                            },
-                            'update': {
-                                'parameters': {
-                                    '$schema': 'http://json-schema.org/draft-04/schema#',
-                                    'type': 'object',
-                                    'properties': {
-                                        'size': {
-                                            'description': 'Size of storage in GB.',
-                                            'type': 'int'
-                                        },
-                                    }
-                                }
-                            }
-                        },
-                        service_binding={
-                            'create': {
-                                'parameters': {
-                                    '$schema': 'http://json-schema.org/draft-04/schema#',
-                                    'type': 'object',
-                                    'properties': {
-                                        'xxxx': {
-                                            'description': 'Some parameter needed for binding the service instance.',
-                                            'type': 'string'
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                    )
-                ),
+                )
             ],
             tags=['network-drive', 'storage'],
             plan_updateable=True,
@@ -182,30 +125,44 @@ class TuFilesServiceBroker(ServiceBroker):
         pass
 
 
-class TuProCloudServiceBroker(ServiceBroker):
+class TuCloudServiceBroker(ServiceBroker):
     def catalog(self):
         return Service(
-            id='00000000-0000-0000-0000-000000000002',
-            name='tu-procloud',
-            description='Private Cloud Storage based on ownCloud, located on servers of the TU Wien.',
+            id='c4573c4b-0fec-4c2d-b650-a3daa91a3bf0',
+            name='tu-cloud',
+            description='File Sync and Share service located on servers of the TU Wien.',
             bindable=True,
             metadata=ServiceMetadata(
-                displayName='TUproCloud',
-                imageUrl='http://example.com/tuprocloud_logo.png',
-                longDescription='TUproCloud can also be used for collaboration with external project partners...',
+                displayName='TUCloud',
+                imageUrl='http://example.com/tucloud_logo.png',
+                longDescription='With our File Sync and Share service, you can save your data to a \"virtual memory stick\". The open source software ownCloud runs on TU.it servers and basically offers the familiar features also provided by public cloud systems such as Dropbox.',
                 providerDisplayName='TU.it',
                 documentationUrl='https://www.it.tuwien.ac.at/tuprocloud/',
                 supportUrl='https://support.tuwien.ac.at/assystnet/'
             ),
             plans=[
                 ServicePlan(
-                    id='00000000-0000-0000-0000-000000000001',
-                    name='standard',
-                    description='Configurable private cloud',
+                    id='b1e8a5fd-0abc-4259-8d66-ab6fe8ee8b1d',
+                    name='tu-owncloud',
+                    description='Free file sync and share service for internal use.',
+                    free=True,
+                    metadata=ServicePlanMetaData(
+                        displayName='TUownCloud',
+                        bullets=['20 GB of personal storage space',
+                                 'Running on TU.it servers - your data is present locally on our systems',
+                                 'Data access possible via clients, web and WebDAV',
+                                 'Synchronisation with any number of devices is either automatic or in accordance with settings you make yourself'
+                                 ]
+                    )
+                ),
+                ServicePlan(
+                    id='433b4d74-6ed9-41f5-81e6-4bef7fd66c1f',
+                    name='tu-procloud',
+                    description='File sync and share service for collaboration with external project partners.',
                     free=False,
                     metadata=ServicePlanMetaData(
-                        displayName='Standard',
-                        bullets=['Collaborate with external project partners.',
+                        displayName='TUproCloud',
+                        bullets=['Collaborate with external project partners',
                                  'File-synchronization and sharing',
                                  'Configure access / authorization of members',
                                  'Several 100GB of storage possible'
@@ -259,9 +216,9 @@ class TuProCloudServiceBroker(ServiceBroker):
                                     }
                                 }
                             }
-                        },
+                        }
                     )
-                ),
+                )
             ],
             tags=['cloud-storage', 'file-sync', 'share'],
             plan_updateable=True,
@@ -291,32 +248,31 @@ class TuProCloudServiceBroker(ServiceBroker):
 class TuHostServiceBroker(ServiceBroker):
     def catalog(self):
         return Service(
-            id='00000000-0000-0000-0000-000000000003',
+            id='e636ea62-a613-41a5-88b5-34f7be4b8d34',
             name='tu-host',
             description='Run virtual machine on central, highly available virtualization platform',
             bindable=False,
             metadata=ServiceMetadata(
                 displayName='TUhost',
                 imageUrl='http://example.com/tuhost_logo.png',
-                longDescription='The virtual machine is running on redundant servers in the data center ' \
-                                'Freihaus, Wiedner Hauptstr. 8-10 and Gußhausstr. 27.29, 1040 Wien',
+                longDescription='You have the opportunity to operate virtual machines on the central and highly available TU.it virtualisation platform, hosted on VMware ESXi. TUhost is suitable for operating servers with moderate resource requirements, but high availability demands. The virtualisation platform is not suitable for operating servers that are to support applications demanding a particularly high computing capacity and/or storage performance, such as simulation calculations, high-performance databases or storage for vast quantities of data.',
                 providerDisplayName='TU.it',
                 documentationUrl='https://www.it.tuwien.ac.at/tuhost/',
                 supportUrl='https://support.tuwien.ac.at/assystnet/'
             ),
             plans=[
                 ServicePlan(
-                    id='00000000-0000-0000-0000-000000000001',
+                    id='057997b7-22ac-4d6b-90a9-b2c8d5e289e6',
                     name='standard',
-                    description='Configurable VM',
+                    description='Configurable, highly available Virtual Machine.',
                     free=False,
                     bindable=False,
                     metadata=ServicePlanMetaData(
-                        displayName='Standard',
-                        bullets=['24 hours availability',
-                                 'Configure your VM: CPU, RAM, Disk Space',
-                                 'Choose OS: CentOS, Debian, Windows Server',
-                                 'Includes backup and restore functionality'
+                        displayName='TUhost Standard',
+                        bullets=['Provision of virtual servers including storage for TU organisational units',
+                                 'Backup for VMs',
+                                 'VM administration portal',
+                                 'Restore option in self-service via a portal'
                                  ],
                         costs=[
                             ServicePlanCost(
@@ -426,7 +382,7 @@ class TuHostServiceBroker(ServiceBroker):
                                     }
                                 }
                             }
-                        },
+                        }
                     )
                 ),
             ],
