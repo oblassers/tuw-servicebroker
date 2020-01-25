@@ -20,16 +20,17 @@ In this example we implement [v2.13](https://github.com/openservicebrokerapi/ser
 ## Run the Service Broker
 The service broker can be run in a Docker container. Therefore, please make sure you have Docker installed.
 
-Build the Docker image:
+Move to the project root directory and build the Docker image:
 
 ```shell
+cd tuw-servicebroker/
 docker build -t openservicebroker:latest .
 ```
 
 Start the Docker container on port 8000:
 
 ```shell
-run --name openservicebroker -d -p 8000:5000 --rm openservicebroker:latest
+docker run --name openservicebroker -d -p 8000:5000 --rm openservicebroker:latest
 ```
 
 ## Test the Service Broker
