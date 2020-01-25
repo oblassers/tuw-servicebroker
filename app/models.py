@@ -133,7 +133,7 @@ class TuCloudServiceBroker(ServiceBroker):
             description='File Sync and Share service located on servers of the TU Wien.',
             bindable=True,
             metadata=ServiceMetadata(
-                displayName='TUCloud',
+                displayName='TUcloud',
                 imageUrl='http://example.com/tucloud_logo.png',
                 longDescription='With our File Sync and Share service, you can save your data to a \"virtual memory stick\". The open source software ownCloud runs on TU.it servers and basically offers the familiar features also provided by public cloud systems such as Dropbox.',
                 providerDisplayName='TU.it',
