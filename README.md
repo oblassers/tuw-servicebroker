@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/218527563.svg)](https://zenodo.org/badge/latestdoi/218527563)
+
 # TU.it Service Broker
 The TU.it Service Broker is a proof-of-concept implementation to provide a standard interface for ICT services available at Vienna University of Technology:
 
